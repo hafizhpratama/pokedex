@@ -1,50 +1,85 @@
-# React + TypeScript + Vite
+# Pokedex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a Pokedex application built using React.js, TypeScript, and Vite. The application allows users to explore Pokémon information, including base stats, types, abilities, and detailed descriptions. It features a dynamic and engaging UI that makes it easy to search for and view Pokémon data.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Pokémon List**: Display a list of Pokémon with pagination and search functionality.
+- **Pokémon Details**: View detailed information about each Pokémon, including base stats, abilities, and a description.
+- **Responsive Design**: The application is designed to be responsive and looks great on both desktop and mobile devices.
+- **Loading States**: Interactive loading spinners are used to enhance the user experience during data fetching.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies
 
-- Configure the top-level `parserOptions` property like this:
+- **React.js**: A JavaScript library for building user interfaces.
+- **TypeScript**: A strongly-typed programming language that builds on JavaScript, providing static type checking.
+- **Vite**: A modern build tool that provides fast development and build processes.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To get started with the project, follow these steps:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. **Clone the Repository:**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/your-username/pokedex.git
+   cd pokedex
+   ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the Development Server:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the Application:**
+
+   Open your browser and go to `http://localhost:3000` to view the application.
+
+## Usage
+
+- **Search for Pokémon**: Use the search bar to find Pokémon by name or ID.
+- **View Details**: Click on a Pokémon to view detailed information in a modal.
+- **Pagination**: Navigate through pages of Pokémon with pagination controls.
+
+## Project Structure
+
+- `src/` - Contains the source code for the application.
+  - `components/` - Reusable React components.
+  - `constants/` - Contains constant values like Pokémon type colors.
+  - `services/` - Functions to interact with external APIs.
+  - `styles/` - Tailwind CSS styles for the application.
+  - `types/` - TypeScript type definitions.
+- `public/` - Contains static assets.
+- `index.html` - The main HTML file.
+- `vite.config.ts` - Vite configuration file.
+
+## Contributing
+
+If you would like to contribute to the project, please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes and commit them.
+4. Push your branch to your forked repository.
+5. Open a pull request to the main repository.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+- **Hafizh Pratama** - [GitHub](https://github.com/your-username)
+
+## Acknowledgements
+
+- [PokéAPI](https://pokeapi.co/) for providing Pokémon data.
