@@ -1,7 +1,6 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import LoadingSpinner from './LoadingSpinner';
-import { typeColors } from '../constants/typeColors';
-import { fetchPokemonImage } from '../services/pokeApi';
+import React, { useState, useCallback, useMemo } from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import { typeColors } from "../constants/typeColors";
 
 interface PokemonCardProps {
   name: string;
@@ -13,7 +12,6 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = React.memo(
   ({ name, id, types, onClick }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
 
     const handleImageLoad = useCallback(() => {
       setIsLoading(false);
@@ -24,22 +22,13 @@ const PokemonCard: React.FC<PokemonCardProps> = React.memo(
     }, []);
 
     const formattedName = useMemo(
-      () => name.toUpperCase().replace(/-/g, ' '),
+      () => name.toUpperCase().replace(/-/g, " "),
       [name]
     );
-    const formattedId = useMemo(() => id.toString().padStart(3, '0'), [id]);
+    const formattedId = useMemo(() => id.toString().padStart(3, "0"), [id]);
 
     const primaryType = types[0];
-    const backgroundColor = typeColors[primaryType] || '#B0B0B0';
-
-    useEffect(() => {
-      const fetchImage = async () => {
-        const image = await fetchPokemonImage(id);
-        setImageUrl(image);
-      };
-
-      fetchImage();
-    }, [id]);
+    const backgroundColor = typeColors[primaryType] || "#B0B0B0";
 
     return (
       <div
@@ -50,10 +39,10 @@ const PokemonCard: React.FC<PokemonCardProps> = React.memo(
         <div className="p-4 flex flex-col items-center">
           {isLoading && <LoadingSpinner />}
           <img
-            src={imageUrl || `https://pokeapi.co/api/v2/pokemon-form/${id}/`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             alt={name}
             className={`w-32 h-32 object-cover mb-4 rounded-full border-4 border-yellow-300 shadow-md transition-opacity duration-300 ${
-              isLoading ? 'opacity-0' : 'opacity-100'
+              isLoading ? "opacity-0" : "opacity-100"
             }`}
             onLoad={handleImageLoad}
             onError={handleImageError}
@@ -70,7 +59,7 @@ const PokemonCard: React.FC<PokemonCardProps> = React.memo(
                 <span
                   key={type}
                   className="inline-block mx-1 mb-1 px-3 py-1 rounded-full text-white font-medium"
-                  style={{ backgroundColor: typeColors[type] || '#B0B0B0' }}
+                  style={{ backgroundColor: typeColors[type] || "#B0B0B0" }}
                 >
                   {type.toUpperCase()}
                 </span>

@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import {
   fetchPokemonDetails,
   fetchPokemons,
   fetchPokemonsByType,
   fetchPokemonTypes,
-} from '../services/pokeApi';
-import PokemonModal from '../components/PokemonModal';
-import { usePokemonStore } from '../store/pokemonStore';
-import PokemonCard from '../components/PokemonCard';
-import { typeColors } from '../constants/typeColors';
+} from "../services/pokeApi";
+import PokemonModal from "../components/PokemonModal";
+import { usePokemonStore } from "../store/pokemonStore";
+import PokemonCard from "../components/PokemonCard";
+import { typeColors } from "../constants/typeColors";
 import {
   Pokemon,
   PokemonDetails,
@@ -16,15 +16,15 @@ import {
   TypeDetail,
   AbilityDetail,
   Stats,
-} from '../types/pokemon';
-import LoadingSpinner from '../components/LoadingSpinner';
+} from "../types/pokemon";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const HomePage: React.FC = () => {
   const { pokemons, setPokemons } = usePokemonStore();
   const [loading, setLoading] = useState(true);
   const [loadingPokemons, setLoadingPokemons] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    'all'
+    "all"
   );
   const [categories, setCategories] = useState<string[]>([]);
   const [pagination, setPagination] = useState({
@@ -40,9 +40,9 @@ const HomePage: React.FC = () => {
     const loadCategories = async () => {
       try {
         const types: string[] = await fetchPokemonTypes();
-        setCategories(['all', ...types.filter((type) => type !== 'unknown')]);
+        setCategories(["all", ...types.filter((type) => type !== "unknown")]);
       } catch (error) {
-        console.error('Failed to load categories', error);
+        console.error("Failed to load categories", error);
       } finally {
         setLoading(false);
       }
@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
       setLoadingPokemons(true);
       try {
         let data: { name: string }[] = [];
-        if (selectedCategory === 'all') {
+        if (selectedCategory === "all") {
           const { results, count } = await fetchPokemons(
             pagination.offset,
             pagination.limit
@@ -94,13 +94,20 @@ const HomePage: React.FC = () => {
               abilities: details.abilities.map(
                 (ability: AbilityDetail) => ability.ability.name
               ),
-              stats,
+              stats: {
+                hp: stats.hp,
+                attack: stats.attack,
+                defense: stats.defense,
+                specialAttack: stats.specialAttack,
+                specialDefense: stats.specialDefense,
+                speed: stats.speed,
+              },
             };
           })
         );
         setPokemons(detailedData);
       } catch (error) {
-        console.error('Failed to load Pokémon data', error);
+        console.error("Failed to load Pokémon data", error);
       } finally {
         setLoadingPokemons(false);
       }
@@ -129,7 +136,7 @@ const HomePage: React.FC = () => {
 
       if (left > 1) {
         range.push(1);
-        if (left > 2) range.push('...');
+        if (left > 2) range.push("...");
       }
 
       for (let i = left; i <= right; i++) {
@@ -137,7 +144,7 @@ const HomePage: React.FC = () => {
       }
 
       if (right < totalPages) {
-        if (right < totalPages - 1) range.push('...');
+        if (right < totalPages - 1) range.push("...");
         range.push(totalPages);
       }
 
@@ -179,7 +186,7 @@ const HomePage: React.FC = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="relative p-4 min-h-screen bg-[url('https://example.com/background-pattern.png')] bg-cover bg-center">
+    <div className="relative p-4 min-h-screen">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-green-200 to-yellow-100 opacity-80"></div>
       <div className="relative z-10 p-4">
         <div className="flex justify-center mb-12">
@@ -196,7 +203,7 @@ const HomePage: React.FC = () => {
                 key={category}
                 onClick={() => handleCategoryChange(category)}
                 className="px-6 py-2 rounded-full text-white font-semibold transition-transform transform hover:scale-105"
-                style={{ backgroundColor: typeColors[category] || '#B0B0B0' }}
+                style={{ backgroundColor: typeColors[category] || "#B0B0B0" }}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
@@ -221,14 +228,14 @@ const HomePage: React.FC = () => {
                 <div className="flex flex-col items-center gap-4 mt-10">
                   <div className="py-4 px-6 bg-white border border-red-600 rounded-lg shadow-sm">
                     <span className="text-lg font-semibold text-black">
-                      Showing {pagination.offset + 1} -{' '}
+                      Showing {pagination.offset + 1} -{" "}
                       <span className="text-red-600 font-bold">
                         {Math.min(
                           pagination.offset + pagination.limit,
                           pagination.total
                         )}
-                      </span>{' '}
-                      of{' '}
+                      </span>{" "}
+                      of{" "}
                       <span className="text-red-700 font-bold">
                         {pagination.total}
                       </span>
@@ -251,10 +258,10 @@ const HomePage: React.FC = () => {
                           key={index}
                           onClick={() => handlePageChange(Number(page))}
                           className={`px-4 py-2 rounded-md ${
-                            typeof page === 'number' &&
+                            typeof page === "number" &&
                             page === pagination.currentPage
-                              ? 'bg-red-700 text-white'
-                              : 'bg-white text-red-600'
+                              ? "bg-red-700 text-white"
+                              : "bg-white text-red-600"
                           } border border-red-600 transition-colors hover:bg-red-100`}
                         >
                           {page}

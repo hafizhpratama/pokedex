@@ -1,10 +1,11 @@
-import create from 'zustand';
+import create from "zustand";
+import { Pokemon } from "../types/pokemon";
 
 interface PokemonState {
-  pokemons: any[];
-  selectedPokemon: any | null;
-  setPokemons: (pokemons: any[]) => void;
-  setSelectedPokemon: (pokemon: any | null) => void;
+  pokemons: Pokemon[];
+  selectedPokemon: Pokemon | null;
+  setPokemons: (pokemons: Pokemon[]) => void;
+  setSelectedPokemon: (pokemon: Pokemon | null) => void;
 }
 
 export const usePokemonStore = create<PokemonState>((set) => ({
