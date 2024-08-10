@@ -78,7 +78,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-- **Hafizh Pratama** - [GitHub](https://github.com/your-username)
+- **Hafizh Pratama** - [GitHub](https://github.com/hafizhpratama)
 
 ## Acknowledgements
 
