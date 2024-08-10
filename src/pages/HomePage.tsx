@@ -98,8 +98,8 @@ const HomePage: React.FC = () => {
                 hp: stats.hp,
                 attack: stats.attack,
                 defense: stats.defense,
-                specialAttack: stats.specialAttack,
-                specialDefense: stats.specialDefense,
+                specialAttack: stats["special-attack"],
+                specialDefense: stats["special-defense"],
                 speed: stats.speed,
               },
             };
